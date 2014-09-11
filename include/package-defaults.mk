@@ -54,6 +54,7 @@ define Package/Default
   HIDDEN:=
   URL:=
   VARIANT:=
+  USERID:=
 endef
 
 Build/Patch:=$(Build/Patch/Default)
