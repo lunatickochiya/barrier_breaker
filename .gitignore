@@ -31,3 +31,4 @@ git-src
 *.kate-swp
 *.tar.gz
 .config-*
+/feeds
