@@ -1,3 +1,13 @@
+Aim at small flash and old cpu routers
+这个repo主要专注小闪存和老CPU路由。
+1.加入加速编译gcc功能
+2.to do
+
+1.运行 ./scripts/feeds update -a  
+2.运行 ./scripts/feeds install -a
+3.运行 make menuconfig
+
+
 This is the buildsystem for the OpenWrt Linux distribution.
 
 Please use "make menuconfig" to configure your appreciated
@@ -31,5 +41,3 @@ the lack of case sensitiveness in the file system.
 Sunshine!
 	Your OpenWrt Project
 	http://openwrt.org
-
-
