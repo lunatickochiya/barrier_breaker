@@ -1,0 +1,50 @@
+--- a/hostapd/Makefile
++++ b/hostapd/Makefile
+@@ -928,14 +928,14 @@
+ 	@$(AR) cr $@ hostapd_multi.o $(OBJS)
+ 
+ hostapd: $(BCHECK) $(OBJS)
+-	$(Q)$(CC) $(LDFLAGS) -o hostapd $(OBJS) $(LIBS)
++	+$(Q)$(CC) $(LDFLAGS) -o hostapd $(OBJS) $(LIBS)
+ 	@$(E) "  LD " $@
+ 
+ ifdef CONFIG_WPA_TRACE
+ OBJS_c += ../src/utils/trace.o
+ endif
+ hostapd_cli: $(OBJS_c)
+-	$(Q)$(CC) $(LDFLAGS) -o hostapd_cli $(OBJS_c) $(LIBS_c)
++	+$(Q)$(CC) $(LDFLAGS) -o hostapd_cli $(OBJS_c) $(LIBS_c)
+ 	@$(E) "  LD " $@
+ 
+ NOBJS = nt_password_hash.o ../src/crypto/ms_funcs.o $(SHA1OBJS) ../src/crypto/md5.o
+--- a/wpa_supplicant/Makefile
++++ b/wpa_supplicant/Makefile
+@@ -1633,23 +1633,23 @@
+ 	@$(AR) cr $@ wpa_supplicant_multi.o $(OBJS)
+ 
+ wpa_supplicant: $(BCHECK) $(OBJS) $(EXTRA_progs)
+-	$(Q)$(LDO) $(LDFLAGS) -o wpa_supplicant $(OBJS) $(LIBS) $(EXTRALIBS)
++	+$(Q)$(LDO) $(LDFLAGS) -o wpa_supplicant $(OBJS) $(LIBS) $(EXTRALIBS)
+ 	@$(E) "  LD " $@
+ 
+ eapol_test: $(OBJS_t)
+-	$(Q)$(LDO) $(LDFLAGS) -o eapol_test $(OBJS_t) $(LIBS)
++	+$(Q)$(LDO) $(LDFLAGS) -o eapol_test $(OBJS_t) $(LIBS)
+ 	@$(E) "  LD " $@
+ 
+ preauth_test: $(OBJS_t2)
+-	$(Q)$(LDO) $(LDFLAGS) -o preauth_test $(OBJS_t2) $(LIBS)
++	+$(Q)$(LDO) $(LDFLAGS) -o preauth_test $(OBJS_t2) $(LIBS)
+ 	@$(E) "  LD " $@
+ 
+ wpa_passphrase: $(OBJS_p)
+-	$(Q)$(LDO) $(LDFLAGS) -o wpa_passphrase $(OBJS_p) $(LIBS_p)
++	+$(Q)$(LDO) $(LDFLAGS) -o wpa_passphrase $(OBJS_p) $(LIBS_p)
+ 	@$(E) "  LD " $@
+ 
+ wpa_cli: $(OBJS_c)
+-	$(Q)$(LDO) $(LDFLAGS) -o wpa_cli $(OBJS_c) $(LIBS_c)
++	+$(Q)$(LDO) $(LDFLAGS) -o wpa_cli $(OBJS_c) $(LIBS_c)
+ 	@$(E) "  LD " $@
+ 
+ link_test: $(OBJS) $(OBJS_h) tests/link_test.o
