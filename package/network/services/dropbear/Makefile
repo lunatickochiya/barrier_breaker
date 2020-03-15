@@ -75,8 +75,8 @@ CONFIGURE_ARGS += \
 	--disable-zlib \
 	--enable-bundled-libtom
 
-TARGET_CFLAGS += -DARGTYPE=3 -ffunction-sections -fdata-sections
-TARGET_LDFLAGS += -Wl,--gc-sections
+TARGET_CFLAGS += -DARGTYPE=3 -ffunction-sections -fdata-sections -flto
+TARGET_LDFLAGS += -Wl,--gc-sections -flto=jobserver
 
 define Build/Configure
 	$(Build/Configure/Default)
