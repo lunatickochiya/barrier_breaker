@@ -120,7 +120,7 @@ $(STAGING_DIR_HOST)/.prepared: $(TMP_DIR)/.build
 define PrepareCommand
 $(STAGING_DIR_HOST)/bin/$(1): $(STAGING_DIR_HOST)/.prepared
 	@mkdir -p "$$(dir $$@)"; rm -f "$$@"
-	@export FILE="$$$$(which $(2) 2>/dev/null | grep -v 'not found' | head -n1)"; [ -n "$$$$FILE" ] || { \
+	@export PATH="$(subst $(space),:,$(filter-out $(STAGING_DIR_HOST)/%,$(subst :,$(space),$(PATH))))"; export FILE="$$$$(which $(2) 2>/dev/null | grep -v 'not found' | head -n1)"; [ -n "$$$$FILE" ] || { \
 		echo "Command $(1) not found."; false; \
 	}; ln -s "$$$$FILE" "$$@"
 
