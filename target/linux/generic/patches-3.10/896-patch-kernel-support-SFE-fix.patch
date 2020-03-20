@@ -1,0 +1,27 @@
+--- a/include/linux/skbuff.h	2017-06-24 11:38:23.000000000 +0800
++++ b/include/linux/skbuff.h	2017-06-24 11:44:23.112531660 +0800
+@@ -457,7 +457,6 @@
+ 
+ 	__u32			rxhash;
+ 
+-	__u8			fast_forwarded:1;
+ 	__be16			vlan_proto;
+ 	__u16			vlan_tci;
+ 
+@@ -480,6 +479,7 @@
+ 	__u8			wifi_acked:1;
+ 	__u8			no_fcs:1;
+ 	__u8			head_frag:1;
++	__u8			fast_forwarded:1;
+ 	/* Encapsulation protocol and NIC drivers should use
+ 	 * this flag to indicate to each other if the skb contains
+ 	 * encapsulated packet or not and maybe use the inner packet
+--- a/include/net/ip6_route.h
++++ b/include/net/ip6_route.h
+@@ -103,5 +103,5 @@
+ 						    struct in6_addr *saddr);
+ 
+-extern struct rt6_info		*rt6_lookup(struct net *net,
++extern struct rt6_info  *__weak rt6_lookup(struct net *net,
+ 					    const struct in6_addr *daddr,
+ 					    const struct in6_addr *saddr,
