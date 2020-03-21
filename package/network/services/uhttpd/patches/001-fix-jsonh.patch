@@ -1,0 +1,51 @@
+From ae3fe30b6a1d4a45a34b3a896e9a4997c5da500f Mon Sep 17 00:00:00 2001
+From: John Crispin <blogic@openwrt.org>
+Date: Wed, 11 Mar 2015 09:32:37 +0100
+Subject: [PATCH] fixes for json 0.12 Signed-off-by: John Crispin
+ <blogic@openwrt.org>
+
+---
+ ubus.c   | 8 ++++----
+ uhttpd.h | 2 +-
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/ubus.c b/ubus.c
+index 4fa0319..f7d1f11 100644
+--- a/ubus.c
++++ b/ubus.c
+@@ -192,16 +192,16 @@ static void uh_ubus_send_response(struct client *cl)
+ static void uh_ubus_init_response(struct client *cl)
+ {
+ 	struct dispatch_ubus *du = &cl->dispatch.ubus;
+-	struct json_object *obj = du->jsobj_cur;
++	struct json_object *obj = du->jsobj_cur, *obj2 = NULL;
+ 
+ 	blob_buf_init(&buf, 0);
+ 	blobmsg_add_string(&buf, "jsonrpc", "2.0");
+ 
+ 	if (obj)
+-		obj = json_object_object_get(obj, "id");
++		json_object_object_get_ex(obj, "id", &obj2);
+ 
+-	if (obj)
+-		blobmsg_add_json_element(&buf, "id", obj);
++	if (obj2)
++		blobmsg_add_json_element(&buf, "id", obj2);
+ 	else
+ 		blobmsg_add_field(&buf, BLOBMSG_TYPE_UNSPEC, "id", NULL, 0);
+ }
+diff --git a/uhttpd.h b/uhttpd.h
+index 9bf8cbb..1c82d76 100644
+--- a/uhttpd.h
++++ b/uhttpd.h
+@@ -31,7 +31,7 @@
+ #include <libubox/utils.h>
+ #ifdef HAVE_UBUS
+ #include <libubus.h>
+-#include <json/json.h>
++#include <json-c/json.h>
+ #endif
+ #ifdef HAVE_TLS
+ #include <libubox/ustream-ssl.h>
+-- 
+2.20.1
