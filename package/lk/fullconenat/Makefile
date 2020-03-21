@@ -51,7 +51,6 @@ endef
 include $(INCLUDE_DIR)/kernel-defaults.mk
 
 define Build/Prepare
-	$(call Build/Prepare/Default)
 	$(CP) ./files/Makefile $(PKG_BUILD_DIR)/
 endef
 
@@ -62,7 +61,6 @@ define Build/Compile
         SUBDIRS="$(PKG_BUILD_DIR)" \
         EXTRA_CFLAGS="$(BUILDFLAGS)" \
         modules
-	$(call Build/Compile/Default)
 endef
 
 $(eval $(call BuildPackage,iptables-mod-fullconenat))
