@@ -1,0 +1,24 @@
+From b71df5b75f9abb369cdcc69ba47297e5fbc17a64 Mon Sep 17 00:00:00 2001
+From: John Crispin <blogic@openwrt.org>
+Date: Sun, 8 Mar 2015 15:04:13 +0100
+Subject: [PATCH] fix for json 0.12 Signed-off-by: John Crispin
+ <blogic@openwrt.org>
+
+---
+ include/rpcd/plugin.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/rpcd/plugin.h b/include/rpcd/plugin.h
+index 3f992dc..8a1178d 100644
+--- a/include/rpcd/plugin.h
++++ b/include/rpcd/plugin.h
+@@ -33,7 +33,7 @@
+ 
+ #include <libubox/blobmsg_json.h>
+ #include <libubus.h>
+-#include <json/json.h>
++#include <json-c/json.h>
+ 
+ #include <rpcd/exec.h>
+ #include <rpcd/session.h>
+
