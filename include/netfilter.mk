@@ -99,6 +99,13 @@ $(eval $(call nf_add,IPT_FILTER,CONFIG_NETFILTER_XT_MATCH_LAYER7, $(P_XT)xt_laye
 $(eval $(call nf_add,IPT_FILTER,CONFIG_NETFILTER_XT_MATCH_STRING, $(P_XT)xt_string))
 
 
+# imq
+
+$(eval $(call nf_add,IPT_IMQ,CONFIG_IP_NF_TARGET_IMQ, $(P_V4)ipt_IMQ))
+$(eval $(call nf_add,IPT_IMQ,CONFIG_NETFILTER_XT_TARGET_IMQ, $(P_XT)xt_IMQ))
+
+
+
 # ipopt
 
 $(eval $(call nf_add,IPT_IPOPT,CONFIG_NETFILTER_XT_MATCH_DSCP, $(P_XT)xt_dscp))
@@ -149,6 +156,7 @@ $(eval $(if $(NF_KMOD),$(call nf_add,IPT_IPV6,CONFIG_IP6_NF_RAW, $(P_V6)ip6table
 $(eval $(if $(NF_KMOD),,$(call nf_add,IPT_IPV6,CONFIG_IP6_NF_IPTABLES, ip6t_icmp6)))
 
 
+$(eval $(call nf_add,IPT_IPV6,CONFIG_IP6_NF_TARGET_IMQ, $(P_V6)ip6t_IMQ))
 $(eval $(call nf_add,IPT_IPV6,CONFIG_IP6_NF_TARGET_LOG, $(P_V6)ip6t_LOG))
 $(eval $(call nf_add,IPT_IPV6,CONFIG_IP6_NF_TARGET_REJECT, $(P_V6)ip6t_REJECT))
 
@@ -343,6 +351,7 @@ IPT_BUILTIN += $(IPT_CONNTRACK-y)
 IPT_BUILTIN += $(IPT_CONNTRACK_EXTRA-y)
 IPT_BUILTIN += $(IPT_EXTRA-y)
 IPT_BUILTIN += $(IPT_FILTER-y)
+IPT_BUILTIN += $(IPT_IMQ-y)
 IPT_BUILTIN += $(IPT_IPOPT-y)
 IPT_BUILTIN += $(IPT_IPRANGE-y)
 IPT_BUILTIN += $(IPT_IPSEC-y)
@@ -366,3 +375,23 @@ IPT_BUILTIN += $(EBTABLES_IP6-y)
 IPT_BUILTIN += $(EBTABLES_WATCHERS-y)
 
 endif # __inc_netfilter
+
+
+IPT_WEBURL-m :=
+IPT_WEBURL-$(CONFIG_IP_NF_MATCH_WEBURL) += $(P_V4)ipt_weburl
+IPT_BUILTIN += $(IPT_WEBURL-y)
+
+
+IPT_WEBMON-m :=
+IPT_WEBMON-$(CONFIG_IP_NF_MATCH_WEBMON) += $(P_V4)ipt_webmon
+IPT_BUILTIN += $(IPT_WEBMON-y)
+
+
+IPT_TIMERANGE-m :=
+IPT_TIMERANGE-$(CONFIG_IP_NF_MATCH_TIMERANGE) += $(P_V4)ipt_timerange
+IPT_BUILTIN += $(IPT_TIMERANGE-y)
+
+
+IPT_BANDWIDTH-m :=
+IPT_BANDWIDTH-$(CONFIG_IP_NF_MATCH_BANDWIDTH) += $(P_V4)ipt_bandwidth
+IPT_BUILTIN += $(IPT_BANDWIDTH-y)
