@@ -2259,7 +2259,7 @@ config BUSYBOX_DEFAULT_VCONFIG
 	default y
 config BUSYBOX_DEFAULT_WGET
 	bool
-	default y
+	default n
 config BUSYBOX_DEFAULT_FEATURE_WGET_STATUSBAR
 	bool
 	default y

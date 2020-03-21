@@ -38,6 +38,7 @@ define Package/opkg/Default
   CATEGORY:=Base system
   TITLE:=opkg package manager
   MAINTAINER:=Jo-Philipp Wich <xm@subsignal.org>
+  DEPENDS:=+uclient-fetch
   URL:=http://wiki.openmoko.org/wiki/Opkg
 endef
 
