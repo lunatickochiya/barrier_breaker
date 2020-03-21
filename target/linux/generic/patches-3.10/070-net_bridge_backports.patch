@@ -1077,6 +1077,7 @@ Date:   Tue May 21 21:52:54 2013 +0000
 -	if (timer_pending(&br->multicast_querier_timer))
 -		return -EBUSY;
 -
+ 	memset(&ip, 0, sizeof(ip));
  	ip.proto = entry->addr.proto;
 -	if (ip.proto == htons(ETH_P_IP))
 +	if (ip.proto == htons(ETH_P_IP)) {
@@ -1095,4 +1096,3 @@ Date:   Tue May 21 21:52:54 2013 +0000
 +	}
  
  	spin_lock_bh(&br->multicast_lock);
- 	mdb = mlock_dereference(br->mdb, br);

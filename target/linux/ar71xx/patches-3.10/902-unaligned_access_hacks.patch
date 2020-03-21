@@ -282,15 +282,6 @@
  		case IPV6_2292HOPOPTS:
 --- a/net/ipv6/ip6_gre.c
 +++ b/net/ipv6/ip6_gre.c
-@@ -391,7 +391,7 @@ static void ip6gre_err(struct sk_buff *s
- 
- 	t = ip6gre_tunnel_lookup(skb->dev, &ipv6h->daddr, &ipv6h->saddr,
- 				flags & GRE_KEY ?
--				*(((__be32 *)p) + (grehlen / 4) - 1) : 0,
-+				net_hdr_word(((__be32 *)p) + (grehlen / 4) - 1) : 0,
- 				p[1]);
- 	if (t == NULL)
- 		return;
 @@ -483,11 +483,11 @@ static int ip6gre_rcv(struct sk_buff *sk
  			offset += 4;
  		}

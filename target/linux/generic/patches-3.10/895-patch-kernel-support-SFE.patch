@@ -314,9 +314,9 @@
 -	RCU_INIT_POINTER(net->ct.nf_conntrack_event_cb, NULL);
 -	mutex_unlock(&nf_ct_ecache_mutex);
 +	return atomic_notifier_chain_unregister(&net->ct.nf_conntrack_chain, nb);
+	/* synchronize_rcu() is called from ctnetlink_exit. */
  }
  EXPORT_SYMBOL_GPL(nf_conntrack_unregister_notifier);
- 
 --- a/net/netfilter/nf_conntrack_netlink.c	2017-06-07 18:06:14.000000000 +0800
 +++ b/net/netfilter/nf_conntrack_netlink.c	2017-06-24 12:09:18.044153196 +0800
 @@ -28,6 +28,7 @@
