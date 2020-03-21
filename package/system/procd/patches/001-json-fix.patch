@@ -1,0 +1,69 @@
+From 47d5be7160e33966f5ded484232d10dcc220f172 Mon Sep 17 00:00:00 2001
+From: John Crispin <blogic@openwrt.org>
+Date: Fri, 6 Mar 2015 17:46:04 +0100
+Subject: [PATCH] json 0.12 fixes Signed-off-by: John Crispin
+ <blogic@openwrt.org>
+
+---
+ CMakeLists.txt     | 3 +--
+ plug/hotplug.c     | 2 +-
+ service/validate.c | 6 +++---
+ 3 files changed, 5 insertions(+), 6 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 5414677..98395f5 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -14,8 +14,7 @@ SET(SOURCES procd.c signal.c watchdog.c state.c	inittab.c rcS.c	ubus.c system.c
+ 	service/service.c service/instance.c service/validate.c service/trigger.c service/watch.c
+ 	plug/coldplug.c plug/hotplug.c utils/utils.c)
+ 
+-find_library(json NAMES json-c json)
+-SET(LIBS ubox ubus ${json} blobmsg_json json_script)
++SET(LIBS ubox ubus json-c blobmsg_json json_script)
+ 
+ IF(DEBUG)
+   ADD_DEFINITIONS(-DDEBUG -g3)
+diff --git a/plug/hotplug.c b/plug/hotplug.c
+index 061833a..6df7971 100644
+--- a/plug/hotplug.c
++++ b/plug/hotplug.c
+@@ -22,7 +22,7 @@
+ #include <libubox/blobmsg_json.h>
+ #include <libubox/json_script.h>
+ #include <libubox/uloop.h>
+-#include <json/json.h>
++#include <json-c/json.h>
+ 
+ #include <fcntl.h>
+ #include <unistd.h>
+diff --git a/service/validate.c b/service/validate.c
+index a33a48e..6a449f4 100644
+--- a/service/validate.c
++++ b/service/validate.c
+@@ -13,7 +13,7 @@
+ 
+ #include <libubox/blobmsg_json.h>
+ #include <libubox/avl-cmp.h>
+-#include <json/json.h>
++#include <json-c/json.h>
+ 
+ #include "../procd.h"
+ 
+@@ -53,12 +53,12 @@ service_validate_dump_all(struct blob_buf *b, char *p, char *s)
+ 		if (s && strcmp(s, v->type))
+ 			continue;
+ 
+-		o = json_object_object_get(r, v->package);
++		json_object_object_get_ex(r, v->package, &o);
+ 		if (!o) {
+ 			o = json_object_new_object();
+ 			json_object_object_add(r, v->package, o);
+ 		}
+-		t = json_object_object_get(o, v->type);
++		json_object_object_get_ex(o, v->type, &t);
+ 		if (!t) {
+ 			t = json_object_new_object();
+ 			json_object_object_add(o, v->type, t);
+-- 
+2.20.1

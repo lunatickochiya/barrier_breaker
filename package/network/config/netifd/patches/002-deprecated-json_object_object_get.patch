@@ -1,0 +1,26 @@
+From e9d2014a478807c7fac0581bb4a145901a3f23b4 Mon Sep 17 00:00:00 2001
+From: Steven Barth <steven@midlink.org>
+Date: Tue, 23 Dec 2014 14:29:47 +0100
+Subject: [PATCH] handler: replace calls to deprecated json_object_object_get
+
+Signed-off-by: Steven Barth <steven@midlink.org>
+---
+ handler.h | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/handler.h b/handler.h
+index baf9c3c..e96c05a 100644
+--- a/handler.h
++++ b/handler.h
+@@ -35,7 +35,8 @@ json_check_type(json_object *obj, json_type type)
+ static inline json_object *
+ json_get_field(json_object *obj, const char *name, json_type type)
+ {
+-	return json_check_type(json_object_object_get(obj, name), type);
++	return json_object_object_get_ex(obj, name, &obj) ?
++			json_check_type(obj, type) : NULL;
+ }
+ 
+ int netifd_open_subdir(const char *name);
+-- 
+2.20.1

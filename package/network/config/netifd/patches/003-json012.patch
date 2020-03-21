@@ -1,0 +1,41 @@
+From 45fd905c980e56b20770d4b34556749fbca53fcc Mon Sep 17 00:00:00 2001
+From: John Crispin <blogic@openwrt.org>
+Date: Thu, 5 Mar 2015 19:44:31 +0100
+Subject: [PATCH 1/1] netifd: fixes for json-c 0.12
+
+Signed-off-by: John Crispin <blogic@openwrt.org>
+---
+ CMakeLists.txt | 3 +--
+ handler.h      | 2 +-
+ 2 files changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index e648b03..85527be 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -18,9 +18,8 @@ SET(SOURCES
+ 	macvlan.c ubus.c vlandev.c wireless.c)
+ 
+ 
+-find_library(json NAMES json-c json)
+ SET(LIBS
+-	ubox ubus uci ${json} blobmsg_json)
++	ubox ubus uci json-c blobmsg_json)
+ 
+ IF (NOT DEFINED LIBNL_LIBS)
+   FIND_LIBRARY(libnl NAMES libnl-3 libnl nl-3 nl)
+diff --git a/handler.h b/handler.h
+index e96c05a..e3e2af5 100644
+--- a/handler.h
++++ b/handler.h
+@@ -15,7 +15,7 @@
+ #define __NETIFD_HANDLER_H
+ 
+ #include <libubox/blobmsg_json.h>
+-#include <json/json.h>
++#include <json-c/json.h>
+ #include "config.h"
+ 
+ typedef void (*script_dump_cb)(const char *script, const char *name, json_object *obj);
+-- 
+2.20.1
