@@ -19,6 +19,8 @@ echo "DISTRIB_DESCRIPTION='Openwrt'" >> /etc/openwrt_release
 #sed -i '/ath9k/d' /etc/modules.d/ath9k
 #echo "ath9k debug=0x00000200" >> /etc/modules.d/ath9k
 sed -i '202,207d' /www/luci-static/material/js/script.js
+#for ar71xx repo
+sed -i 's~src/gz barrier_breaker_luci http://downloads.openwrt.org/barrier_breaker/14.07~src/gz barrier_breaker_luci http://downloads.openwrt.org/chaos_calmer/15.05~g' /etc/opkg.conf
 
 exit 0
 
