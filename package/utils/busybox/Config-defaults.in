@@ -423,7 +423,7 @@ config BUSYBOX_DEFAULT_FEATURE_DATE_COMPAT
 	default n
 config BUSYBOX_DEFAULT_HOSTID
 	bool
-	default y
+	default n
 config BUSYBOX_DEFAULT_ID
 	bool
 	default y
@@ -1740,7 +1740,7 @@ config BUSYBOX_DEFAULT_FEATURE_DEVFS
 	default n
 config BUSYBOX_DEFAULT_DEVMEM
 	bool
-	default y
+	default n
 config BUSYBOX_DEFAULT_EJECT
 	bool
 	default n
@@ -1911,7 +1911,7 @@ config BUSYBOX_DEFAULT_ARP
 	default n
 config BUSYBOX_DEFAULT_ARPING
 	bool
-	default y
+	default n
 config BUSYBOX_DEFAULT_BRCTL
 	bool
 	default y
@@ -2256,7 +2256,7 @@ config BUSYBOX_DEFAULT_UDPSVD
 	default n
 config BUSYBOX_DEFAULT_VCONFIG
 	bool
-	default y
+	default n
 config BUSYBOX_DEFAULT_WGET
 	bool
 	default y
