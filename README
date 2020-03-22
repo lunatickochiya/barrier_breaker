@@ -1,7 +1,12 @@
 Aim at small flash and old cpu routers
 这个repo主要专注小闪存和老CPU路由。
 1.加入加速编译gcc功能
-2.to do
+2.加入SFE（无主程序，你可以自己去别的repo取）
+3.加入fullcone（已测试可用）同时加入SFE和fullcone的luci
+4.加入石像鬼qos 不可以和sfe同时使用
+5.修复了大量BB的BUG，加入lto编译功能，原版BB不支持lto，部分程序采用lto编译比原来小
+
+测试机器 ar71xx tl-841n-v7 加入所有功能后3.1M 开机后剩余空间484kb 使用根目录下的sample-ar71xx编译
 
 1.运行 ./scripts/feeds update -a  
 2.运行 ./scripts/feeds install -a
